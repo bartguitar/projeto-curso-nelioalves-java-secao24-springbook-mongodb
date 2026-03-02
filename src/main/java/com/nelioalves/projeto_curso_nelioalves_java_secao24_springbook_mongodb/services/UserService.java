@@ -1,6 +1,7 @@
 package com.nelioalves.projeto_curso_nelioalves_java_secao24_springbook_mongodb.services;
 
 import com.nelioalves.projeto_curso_nelioalves_java_secao24_springbook_mongodb.domain.User;
+import com.nelioalves.projeto_curso_nelioalves_java_secao24_springbook_mongodb.dto.UserDTO;
 import com.nelioalves.projeto_curso_nelioalves_java_secao24_springbook_mongodb.repository.UserRepository;
 import com.nelioalves.projeto_curso_nelioalves_java_secao24_springbook_mongodb.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
 }
